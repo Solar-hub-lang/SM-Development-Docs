@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Troubleshooting · SM Development Docs</title>
+  <meta name="description" content="Troubleshooting SM Development FiveM scripts." />
+  <link rel="icon" href="assets/img/sm-logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="SM Development Docs">
+        <img class="logo" src="assets/img/sm-logo.svg" alt="SM Development logo">
+        <span>SM Development <small>FiveM Script Docs</small></span>
+      </a>
+      <button class="mobile-btn" data-mobile-btn>Menu</button>
+      <nav class="navlinks" data-navlinks><a data-nav href="index.html">Home</a><a data-nav href="installation.html">Installation</a><a data-nav href="license-system.html">License System</a><a data-nav href="troubleshooting.html">Troubleshooting</a><a data-nav href="scripts/admin-panel.html">Admin Panel</a><a data-nav href="scripts/fraud.html">Fraud</a><a data-nav href="scripts/ghost-hunting.html">Ghost Hunting</a></nav>
+    </div>
+  </header>
+  <main class="container layout">
+    <aside class="sidebar">
+      <div class="side-title">Docs</div>
+      <a data-nav href="index.html"><span>Home</span><small>›</small></a><a data-nav href="installation.html"><span>Installation</span><small>›</small></a><a data-nav href="license-system.html"><span>License System</span><small>›</small></a><a data-nav href="troubleshooting.html"><span>Troubleshooting</span><small>›</small></a>
+      <div class="side-title">Scripts</div>
+      <a data-nav href="scripts/admin-panel.html"><span>Admin Panel</span><small>›</small></a><a data-nav href="scripts/fraud.html"><span>Fraud</span><small>›</small></a><a data-nav href="scripts/ghost-hunting.html"><span>Ghost Hunting</span><small>›</small></a>
+    </aside>
+    <article class="main doc">
+      
+<h1>Troubleshooting</h1>
+<p class="lead">Brug denne side når et SM Development script ikke starter, UI ikke åbner, database fejler eller license ikke virker.</p>
+<h2>Scriptet starter ikke</h2>
+<ul><li>Tjek resource-navnet i <code>server.cfg</code>.</li><li>Tjek at alle dependencies starter før scriptet.</li><li>Tjek at SQL er importeret.</li><li>Tjek om <code>config.lua</code> har syntax errors.</li><li>Tjek server console for den første error, ikke kun den sidste.</li></ul>
+<h2>Database fejl</h2>
+<pre><code>Table 'database.table_name' doesn't exist</code></pre>
+<p>Det betyder normalt, at SQL-filen ikke er importeret, eller at du bruger forkert database.</p>
+<h2>NUI åbner ikke</h2>
+<ul><li>Tjek at <code>fxmanifest.lua</code> har korrekt <code>ui_page</code>.</li><li>Tjek at <code>html/index.html</code> findes.</li><li>Tjek F8 console for JavaScript errors.</li><li>Tjek om NUI callbacks matcher mellem <code>client.lua</code> og <code>app.js</code>.</li></ul>
+<h2>License invalid</h2>
+<ul><li>Key er forkert.</li><li>IP-lock matcher ikke.</li><li>License API er offline.</li><li>License er expired, disabled eller banned.</li></ul>
+<h2>Bot starter ikke</h2>
+<pre><code>npm install
+node index.js</code></pre>
+<ul><li>Tjek Node.js version.</li><li>Tjek bot token.</li><li>Tjek database config.</li><li>Tjek Discord bot permissions.</li></ul>
+<h2>Support ticket</h2>
+<p>Når du laver en ticket, send:</p>
+<ul><li>Scriptnavn.</li><li>Server console error.</li><li>F8 console error.</li><li>Hvad du gjorde før fejlen kom.</li><li>Din framework/inventory/database setup.</li></ul>
+<div class="callout warning"><strong>Send aldrig:</strong><p>License key, bot token, database password, webhook URL eller panel secret.</p></div>
+
+    </article>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><span><b>SM Development</b> · FiveM scripts documentation</span><span>Red/Black Edition</span></div></footer>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Panel · SM Development Docs</title>
+  <meta name="description" content="Admin Panel documentation." />
+  <link rel="icon" href="../assets/img/sm-logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="../index.html" aria-label="SM Development Docs">
+        <img class="logo" src="../assets/img/sm-logo.svg" alt="SM Development logo">
+        <span>SM Development <small>FiveM Script Docs</small></span>
+      </a>
+      <button class="mobile-btn" data-mobile-btn>Menu</button>
+      <nav class="navlinks" data-navlinks><a data-nav href="../index.html">Home</a><a data-nav href="../installation.html">Installation</a><a data-nav href="../license-system.html">License System</a><a data-nav href="../troubleshooting.html">Troubleshooting</a><a data-nav href="../scripts/admin-panel.html">Admin Panel</a><a data-nav href="../scripts/fraud.html">Fraud</a><a data-nav href="../scripts/ghost-hunting.html">Ghost Hunting</a></nav>
+    </div>
+  </header>
+  <main class="container layout">
+    <aside class="sidebar">
+      <div class="side-title">Docs</div>
+      <a data-nav href="../index.html"><span>Home</span><small>›</small></a><a data-nav href="../installation.html"><span>Installation</span><small>›</small></a><a data-nav href="../license-system.html"><span>License System</span><small>›</small></a><a data-nav href="../troubleshooting.html"><span>Troubleshooting</span><small>›</small></a>
+      <div class="side-title">Scripts</div>
+      <a data-nav href="../scripts/admin-panel.html"><span>Admin Panel</span><small>›</small></a><a data-nav href="../scripts/fraud.html"><span>Fraud</span><small>›</small></a><a data-nav href="../scripts/ghost-hunting.html"><span>Ghost Hunting</span><small>›</small></a>
+    </aside>
+    <article class="main doc">
+      
+<h1>Admin Panel</h1>
+<p class="lead">SM Development Admin Panel er et premium ingame adminpanel til FiveM servere med staff login, permissions, reports, dev tools, Discord integration og license system.</p>
+<div class="meta"><span class="tag red">Admin</span><span class="tag">Reports</span><span class="tag">Permissions</span><span class="tag">License</span><span class="tag">Discord Bot</span></div>
+<h2>Features</h2>
+<ul><li>Staff login med roller og permissions.</li><li>Owner/master account.</li><li>Player list og spillerprofil.</li><li>Bring, goto, freeze, kill, revive og heal.</li><li>Kick, ban, tempban, warn og unban.</li><li>Reports UI for spillere via <code>/report</code>.</li><li>Adminpanel med transparent slider.</li><li>Developer tab med resource status og fejlvisning.</li><li>Audit logs.</li><li>License/IP-lock system.</li><li>Discord bot integration til license og staff verification.</li></ul>
+<h2>Dependencies</h2>
+<div class="table-wrap"><table><thead><tr><th>Dependency</th><th>Påkrævet</th><th>Bruges til</th></tr></thead><tbody><tr><td><code>es_extended</code></td><td>Ja</td><td>ESX player/job integration</td></tr><tr><td><code>oxmysql</code></td><td>Ja</td><td>Staff, reports, punishments og logs</td></tr><tr><td><code>ox_lib</code></td><td>Anbefalet</td><td>Notify, callbacks og utility</td></tr><tr><td>Node.js</td><td>Kun bot</td><td>Nexus_Bot / SM_Bot license API</td></tr></tbody></table></div>
+<h2>Installation</h2>
+<div class="steps"><div class="step"><h3>Upload resource</h3><p>Upload adminpanelet til <code>resources/[SM]/SM_Admin</code> eller behold resource-navnet, hvis pakken bruger <code>NexusRP_Admin</code>.</p></div><div class="step"><h3>Importér SQL</h3><p>Importér alle SQL tables til din FiveM database.</p></div><div class="step"><h3>Ret config</h3><p>Indsæt license key, admin command, report command, Discord settings og permissions.</p></div><div class="step"><h3>Start resource</h3><p>Tilføj resource til <code>server.cfg</code> efter dependencies.</p></div></div>
+<pre><code>ensure oxmysql
+ensure ox_lib
+ensure es_extended
+ensure SM_Admin</code></pre>
+<h2>Config eksempel</h2>
+<pre><code>Config.Command = 'admin'
+Config.ReportCommand = 'report'
+Config.Branding = 'SM Development'
+Config.Debug = false
+
+Config.License = {
+    Enabled = true,
+    Key = 'DIN_LICENSE_KEY_HER'
+}</code></pre>
+<h2>Commands</h2>
+<div class="table-wrap"><table><thead><tr><th>Command</th><th>Hvem</th><th>Beskrivelse</th></tr></thead><tbody><tr><td><code>/admin</code></td><td>Staff</td><td>Åbner adminpanelet.</td></tr><tr><td><code>/report</code></td><td>Alle spillere</td><td>Åbner report UI. Må ikke åbne adminpanelet.</td></tr><tr><td><code>smlicensestatus</code></td><td>Console</td><td>Viser license status.</td></tr><tr><td><code>smlicensecheck</code></td><td>Console</td><td>Tvinger license check.</td></tr></tbody></table></div>
+<h2>Report UI krav</h2>
+<ul><li><code>/report</code> skal kun åbne player report UI.</li><li>Report UI skal ikke åbne adminpanelet.</li><li>Report UI skal kunne lukkes med ESC, X, Annuller og klik på baggrund.</li><li>Report UI skal ikke have blur i baggrunden.</li></ul>
+<h2>Developer tab</h2>
+<p>Developer tabben bruges til resource status, script-fejl, error logs og hurtig debugging.</p>
+<h2>Fejlfinding</h2>
+<ul><li>Hvis adminpanelet åbner sammen med <code>/report</code>, er report UI og admin UI ikke adskilt korrekt i NUI.</li><li>Hvis staff ikke kan logge ind, tjek database, password, Discord role verification og permissions.</li><li>Hvis license fejler, tjek license key, IP-lock og license API.</li></ul>
+
+    </article>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><span><b>SM Development</b> · FiveM scripts documentation</span><span>Red/Black Edition</span></div></footer>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

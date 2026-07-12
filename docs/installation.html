@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Installation · SM Development Docs</title>
+  <meta name="description" content="Install SM Development scripts on FiveM." />
+  <link rel="icon" href="assets/img/sm-logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="SM Development Docs">
+        <img class="logo" src="assets/img/sm-logo.svg" alt="SM Development logo">
+        <span>SM Development <small>FiveM Script Docs</small></span>
+      </a>
+      <button class="mobile-btn" data-mobile-btn>Menu</button>
+      <nav class="navlinks" data-navlinks><a data-nav href="index.html">Home</a><a data-nav href="installation.html">Installation</a><a data-nav href="license-system.html">License System</a><a data-nav href="troubleshooting.html">Troubleshooting</a><a data-nav href="scripts/admin-panel.html">Admin Panel</a><a data-nav href="scripts/fraud.html">Fraud</a><a data-nav href="scripts/ghost-hunting.html">Ghost Hunting</a></nav>
+    </div>
+  </header>
+  <main class="container layout">
+    <aside class="sidebar">
+      <div class="side-title">Docs</div>
+      <a data-nav href="index.html"><span>Home</span><small>›</small></a><a data-nav href="installation.html"><span>Installation</span><small>›</small></a><a data-nav href="license-system.html"><span>License System</span><small>›</small></a><a data-nav href="troubleshooting.html"><span>Troubleshooting</span><small>›</small></a>
+      <div class="side-title">Scripts</div>
+      <a data-nav href="scripts/admin-panel.html"><span>Admin Panel</span><small>›</small></a><a data-nav href="scripts/fraud.html"><span>Fraud</span><small>›</small></a><a data-nav href="scripts/ghost-hunting.html"><span>Ghost Hunting</span><small>›</small></a>
+    </aside>
+    <article class="main doc">
+      
+<h1>Installation</h1>
+<p class="lead">Denne guide viser den normale måde at installere SM Development scripts på en FiveM server.</p>
+<div class="meta"><span class="tag red">FiveM</span><span class="tag">ESX</span><span class="tag">ox_lib</span><span class="tag">oxmysql</span></div>
+<div class="callout warning"><strong>Vigtigt:</strong><p>Upload aldrig license keys, database passwords, bot tokens eller webhooks offentligt på GitHub.</p></div>
+<h2>Standard installation</h2>
+<div class="steps">
+  <div class="step"><h3>Download scriptet</h3><p>Download zipfilen fra SM Development og pak den ud på din computer.</p></div>
+  <div class="step"><h3>Upload resource</h3><p>Upload script-mappen til din servers <code>resources</code> mappe, fx <code>resources/[SM]/SM_Admin</code>.</p></div>
+  <div class="step"><h3>Installer dependencies</h3><p>Sørg for at nødvendige dependencies som <code>es_extended</code>, <code>ox_lib</code>, <code>oxmysql</code> og eventuelt <code>ox_inventory</code> er installeret.</p></div>
+  <div class="step"><h3>Importér SQL</h3><p>Hvis scriptet har en <code>.sql</code> fil, skal den importeres i din database via phpMyAdmin eller databaseværktøj.</p></div>
+  <div class="step"><h3>Ret config.lua</h3><p>Åbn <code>config.lua</code> og indsæt license key, webhooks, jobs, items, commands og andre settings.</p></div>
+  <div class="step"><h3>Tilføj i server.cfg</h3><p>Tilføj scriptet efter dependencies i <code>server.cfg</code>.</p></div>
+</div>
+<h2>server.cfg eksempel</h2>
+<pre><code>ensure oxmysql
+ensure ox_lib
+ensure es_extended
+
+ensure SM_Admin
+ensure SM_Fraud
+ensure SM_GhostHunting</code></pre>
+<h2>Resource rækkefølge</h2>
+<p>Dependencies skal altid starte før selve scriptet. Hvis et script bruger <code>ox_inventory</code>, skal inventory også startes før scriptet.</p>
+<div class="table-wrap"><table><thead><tr><th>Type</th><th>Startes før</th><th>Eksempel</th></tr></thead><tbody><tr><td>Database</td><td>Alle scripts med SQL</td><td><code>ensure oxmysql</code></td></tr><tr><td>Framework</td><td>ESX scripts</td><td><code>ensure es_extended</code></td></tr><tr><td>Library</td><td>Scripts med UI/notify/callback</td><td><code>ensure ox_lib</code></td></tr><tr><td>Inventory</td><td>Scripts med items</td><td><code>ensure ox_inventory</code></td></tr></tbody></table></div>
+<h2>Efter installation</h2>
+<ul><li>Genstart serveren.</li><li>Tjek server console for errors.</li><li>Tjek F8 console ingame, hvis UI ikke åbner.</li><li>Test alle commands som staff/admin.</li><li>Test scriptet med en normal spiller uden admin permissions.</li></ul>
+
+    </article>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><span><b>SM Development</b> · FiveM scripts documentation</span><span>Red/Black Edition</span></div></footer>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

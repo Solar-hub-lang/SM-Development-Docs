@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SM Development Docs</title>
+  <meta name="description" content="Official documentation for SM Development FiveM scripts." />
+  <link rel="icon" href="assets/img/sm-logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="index.html" aria-label="SM Development Docs">
+      <img class="logo" src="assets/img/sm-logo.svg" alt="SM Development logo">
+      <span>SM Development <small>FiveM Script Docs</small></span>
+    </a>
+    <button class="mobile-btn" data-mobile-btn>Menu</button>
+    <nav class="navlinks" data-navlinks><a data-nav href="index.html">Home</a><a data-nav href="installation.html">Installation</a><a data-nav href="license-system.html">License System</a><a data-nav href="troubleshooting.html">Troubleshooting</a><a data-nav href="scripts/admin-panel.html">Admin Panel</a><a data-nav href="scripts/fraud.html">Fraud</a><a data-nav href="scripts/ghost-hunting.html">Ghost Hunting</a></nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="badge"><span class="dot"></span> Official Red/Black Docs</div>
+      <h1><span class="gradient-text">SM Development</span><br>script documentation</h1>
+      <p class="lead">En flot og professionel GitHub Pages dokumentation til dine FiveM scripts. Denne udgave indeholder kun de scripts du bad om: Admin Panel, Fraud og Ghost Hunting.</p>
+      <div class="actions">
+        <a class="btn primary" href="installation.html">Start installation →</a>
+        <a class="btn ghost" href="scripts/admin-panel.html">Læs Admin Panel docs</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="status-line"><div><b>Docs status</b><br><span>Static GitHub Pages ready</span></div><span class="pill ok">Working</span></div>
+      <div class="status-line"><div><b>Design</b><br><span>Red / black SM Development branding</span></div><span class="pill">Premium</span></div>
+      <div class="status-line"><div><b>Scripts included</b><br><span>Admin Panel, Fraud, Ghost Hunting</span></div><span class="pill warn">3 scripts</span></div>
+      <div class="status-line"><div><b>Build system</b><br><span>No Jekyll required</span></div><span class="pill ok">Static</span></div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div><h2>Find din guide</h2><p class="sub">Brug søgningen eller vælg et script. Hver script-side har installation, dependencies, config, commands, database og troubleshooting.</p></div>
+      <label class="search"><input data-search type="search" placeholder="Søg i docs..."><span>⌕</span></label>
+    </div>
+    <div class="grid cols-3">
+      <a class="card" data-doc-card href="scripts/admin-panel.html"><div class="icon">🛡️</div><h3>Admin Panel</h3><p>Staff login, reports, permissions, developer tools, license system og Discord bot integration.</p><span class="card-link">Åbn docs →</span></a>
+      <a class="card" data-doc-card href="scripts/fraud.html"><div class="icon">💳</div><h3>Fraud</h3><p>Fraud job, locations, cooldown, required items, rewards, ATM/skimmer og police alerts.</p><span class="card-link">Åbn docs →</span></a>
+      <a class="card" data-doc-card href="scripts/ghost-hunting.html"><div class="icon">👻</div><h3>Ghost Hunting</h3><p>Multiplayer ghost hunting job, ghosts, timer, vehicles, ox_target og leaderboard.</p><span class="card-link">Åbn docs →</span></a>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container grid cols-3">
+    <a class="card" data-doc-card href="installation.html"><div class="icon">⚙️</div><h3>Installation</h3><p>Fælles installationsguide til alle SM Development scripts.</p><span class="card-link">Læs guide →</span></a>
+    <a class="card" data-doc-card href="license-system.html"><div class="icon">🔑</div><h3>License System</h3><p>License keys, IP-lock, API checks, commands og sikkerhed.</p><span class="card-link">Læs guide →</span></a>
+    <a class="card" data-doc-card href="troubleshooting.html"><div class="icon">🧰</div><h3>Troubleshooting</h3><p>Løs normale fejl med database, config, NUI, dependencies og bot.</p><span class="card-link">Læs guide →</span></a>
+  </div>
+</section>
+<footer class="footer"><div class="container footer-inner"><span><b>SM Development</b> · FiveM scripts documentation</span><span>Made for GitHub Pages</span></div></footer>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

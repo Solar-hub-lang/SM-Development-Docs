@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fraud · SM Development Docs</title>
+  <meta name="description" content="Fraud script documentation." />
+  <link rel="icon" href="../assets/img/sm-logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="../index.html" aria-label="SM Development Docs">
+        <img class="logo" src="../assets/img/sm-logo.svg" alt="SM Development logo">
+        <span>SM Development <small>FiveM Script Docs</small></span>
+      </a>
+      <button class="mobile-btn" data-mobile-btn>Menu</button>
+      <nav class="navlinks" data-navlinks><a data-nav href="../index.html">Home</a><a data-nav href="../installation.html">Installation</a><a data-nav href="../license-system.html">License System</a><a data-nav href="../troubleshooting.html">Troubleshooting</a><a data-nav href="../scripts/admin-panel.html">Admin Panel</a><a data-nav href="../scripts/fraud.html">Fraud</a><a data-nav href="../scripts/ghost-hunting.html">Ghost Hunting</a></nav>
+    </div>
+  </header>
+  <main class="container layout">
+    <aside class="sidebar">
+      <div class="side-title">Docs</div>
+      <a data-nav href="../index.html"><span>Home</span><small>›</small></a><a data-nav href="../installation.html"><span>Installation</span><small>›</small></a><a data-nav href="../license-system.html"><span>License System</span><small>›</small></a><a data-nav href="../troubleshooting.html"><span>Troubleshooting</span><small>›</small></a>
+      <div class="side-title">Scripts</div>
+      <a data-nav href="../scripts/admin-panel.html"><span>Admin Panel</span><small>›</small></a><a data-nav href="../scripts/fraud.html"><span>Fraud</span><small>›</small></a><a data-nav href="../scripts/ghost-hunting.html"><span>Ghost Hunting</span><small>›</small></a>
+    </aside>
+    <article class="main doc">
+      
+<h1>Fraud</h1>
+<p class="lead">SM Development Fraud er et FiveM fraud/criminal activity script med startpunkt, tilfældige locations, required items, rewards, cooldowns, police alerts og mulighed for ATM/skimmer gameplay.</p>
+<div class="meta"><span class="tag red">Criminal Job</span><span class="tag">ESX</span><span class="tag">ox_inventory</span><span class="tag">Police Alerts</span></div>
+<h2>Features</h2>
+<ul><li>Start fraud fra en config location.</li><li>Tilfældige fraud locations fra <code>Config.FraudLocations</code>.</li><li>Required items før start.</li><li>Cooldown og timeout.</li><li>Reward valideret serverside.</li><li>Police alerts.</li><li>Area/location updates.</li><li>ATM/skimmer extension mulighed.</li><li>Locales, fx dansk og engelsk.</li></ul>
+<h2>Dependencies</h2>
+<div class="table-wrap"><table><thead><tr><th>Dependency</th><th>Påkrævet</th><th>Bruges til</th></tr></thead><tbody><tr><td><code>es_extended</code></td><td>Ja</td><td>Player framework</td></tr><tr><td><code>ox_lib</code></td><td>Anbefalet</td><td>Progress, notify, callbacks</td></tr><tr><td><code>ox_inventory</code></td><td>Ja hvis item rewards</td><td>Required items og rewards</td></tr><tr><td><code>oxmysql</code></td><td>Kun hvis logging/stats</td><td>Database logs</td></tr></tbody></table></div>
+<h2>Installation</h2>
+<div class="steps"><div class="step"><h3>Upload resource</h3><p>Upload resource til <code>resources/[SM]/SM_Fraud</code>.</p></div><div class="step"><h3>Tilføj items</h3><p>Hvis scriptet kræver items, skal de oprettes i dit inventory.</p></div><div class="step"><h3>Ret config</h3><p>Indstil start location, fraud locations, rewards, cooldowns, required items og police alerts.</p></div><div class="step"><h3>Start scriptet</h3><p>Tilføj <code>ensure SM_Fraud</code> i <code>server.cfg</code>.</p></div></div>
+<pre><code>ensure ox_lib
+ensure ox_inventory
+ensure es_extended
+ensure SM_Fraud</code></pre>
+<h2>Config eksempel</h2>
+<pre><code>Config.FraudLocation = vec3(127.1, -1710.2, 29.3)
+
+Config.RequiredItems = {
+    { item = 'laptop', amount = 1 },
+    { item = 'usb', amount = 1 }
+}
+
+Config.FraudLocations = {
+    vec3(245.2, -1010.4, 29.3),
+    vec3(-1204.4, -326.3, 37.8),
+    vec3(313.9, -280.5, 54.1)
+}
+
+Config.Cooldown = 20 * 60
+Config.Timeout = 15 * 60
+
+Config.Rewards = {
+    { item = 'black_money', min = 2500, max = 6500 }
+}</code></pre>
+<h2>Security krav</h2>
+<div class="callout"><strong>Server-side validation:</strong><p>Clienten må ikke sende item, amount, price eller reward direkte. Serveren skal selv finde reward fra config og tjekke distance, cooldown og items.</p></div>
+<h2>ATM/skimmer extension</h2>
+<ul><li>Skimmer item kan installeres på ATM.</li><li>Spiller venter, indsamler data og leverer til NPC.</li><li>Memory game eller hack minigame kan bruges.</li><li>Rewards skal gives serverside med <code>CanCarryItem</code> check.</li></ul>
+<h2>Fejlfinding</h2>
+<ul><li>Hvis rewards ikke gives, tjek item-navne og <code>ox_inventory</code>.</li><li>Hvis politiet ikke får alert, tjek webhook/job name/event.</li><li>Hvis spiller kan exploite rewards, tjek at reward beregnes serverside.</li><li>Hvis cooldown ikke virker, tjek activeFrauds/cooldown table serverside.</li></ul>
+
+    </article>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><span><b>SM Development</b> · FiveM scripts documentation</span><span>Red/Black Edition</span></div></footer>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

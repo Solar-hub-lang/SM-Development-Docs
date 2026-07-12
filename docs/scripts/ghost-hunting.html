@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ghost Hunting · SM Development Docs</title>
+  <meta name="description" content="Ghost Hunting script documentation." />
+  <link rel="icon" href="../assets/img/sm-logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="../index.html" aria-label="SM Development Docs">
+        <img class="logo" src="../assets/img/sm-logo.svg" alt="SM Development logo">
+        <span>SM Development <small>FiveM Script Docs</small></span>
+      </a>
+      <button class="mobile-btn" data-mobile-btn>Menu</button>
+      <nav class="navlinks" data-navlinks><a data-nav href="../index.html">Home</a><a data-nav href="../installation.html">Installation</a><a data-nav href="../license-system.html">License System</a><a data-nav href="../troubleshooting.html">Troubleshooting</a><a data-nav href="../scripts/admin-panel.html">Admin Panel</a><a data-nav href="../scripts/fraud.html">Fraud</a><a data-nav href="../scripts/ghost-hunting.html">Ghost Hunting</a></nav>
+    </div>
+  </header>
+  <main class="container layout">
+    <aside class="sidebar">
+      <div class="side-title">Docs</div>
+      <a data-nav href="../index.html"><span>Home</span><small>›</small></a><a data-nav href="../installation.html"><span>Installation</span><small>›</small></a><a data-nav href="../license-system.html"><span>License System</span><small>›</small></a><a data-nav href="../troubleshooting.html"><span>Troubleshooting</span><small>›</small></a>
+      <div class="side-title">Scripts</div>
+      <a data-nav href="../scripts/admin-panel.html"><span>Admin Panel</span><small>›</small></a><a data-nav href="../scripts/fraud.html"><span>Fraud</span><small>›</small></a><a data-nav href="../scripts/ghost-hunting.html"><span>Ghost Hunting</span><small>›</small></a>
+    </aside>
+    <article class="main doc">
+      
+<h1>Ghost Hunting</h1>
+<p class="lead">SM Development Ghost Hunting er et multiplayer job, hvor spillere kan jage ghosts, bruge target/progress, køre ud til locations og optjene rewards/leaderboard progress.</p>
+<div class="meta"><span class="tag red">Job</span><span class="tag">Multiplayer</span><span class="tag">ox_target</span><span class="tag">Leaderboard</span></div>
+<h2>Features</h2>
+<ul><li>Multiplayer job for fx 2-6 spillere.</li><li>Timer på missionen.</li><li>Ghost locations i config.</li><li>Passive og aggressive ghosts.</li><li>Fang spøgelse interaction via target.</li><li>Progress UI.</li><li>Leaderboard/stat tracking.</li><li>Vehicle spawn til holdet.</li><li>Reward efter mission.</li></ul>
+<h2>Dependencies</h2>
+<div class="table-wrap"><table><thead><tr><th>Dependency</th><th>Påkrævet</th><th>Bruges til</th></tr></thead><tbody><tr><td><code>es_extended</code></td><td>Ja</td><td>Player framework</td></tr><tr><td><code>ox_lib</code></td><td>Ja</td><td>Progress, notify, callbacks</td></tr><tr><td><code>ox_target</code></td><td>Anbefalet</td><td>Fang ghost interaction</td></tr><tr><td><code>oxmysql</code></td><td>Hvis leaderboard</td><td>Stats og leaderboard</td></tr><tr><td><code>t1ger_keys</code></td><td>Valgfrit</td><td>Midlertidige vehicle keys</td></tr></tbody></table></div>
+<h2>Installation</h2>
+<div class="steps"><div class="step"><h3>Upload resource</h3><p>Upload resource til <code>resources/[SM]/SM_GhostHunting</code>.</p></div><div class="step"><h3>Importér SQL</h3><p>Hvis leaderboard bruges, importér SQL filen.</p></div><div class="step"><h3>Ret config</h3><p>Indstil start location, ghost coords, vehicle spawn, timer, team size og rewards.</p></div><div class="step"><h3>Start resource</h3><p>Tilføj resource i <code>server.cfg</code> efter dependencies.</p></div></div>
+<pre><code>ensure ox_lib
+ensure ox_target
+ensure es_extended
+ensure SM_GhostHunting</code></pre>
+<h2>Config eksempel</h2>
+<pre><code>Config.Command = 'ghosthunt'
+Config.MinPlayers = 2
+Config.MaxPlayers = 6
+Config.MissionTime = 15 * 60
+
+Config.StartLocation = vec3(-258.4, -975.6, 31.2)
+Config.Vehicle = 'rumpo'
+Config.VehicleSpawn = vec4(-263.2, -982.8, 31.2, 250.0)
+
+Config.Ghosts = {
+    {
+        label = 'Abandoned House',
+        coords = vec3(1002.5, -2145.2, 30.5),
+        type = 'aggressive'
+    },
+    {
+        label = 'Old Motel',
+        coords = vec3(326.7, -213.1, 54.1),
+        type = 'passive'
+    }
+}</code></pre>
+<h2>Gameplay flow</h2>
+<ol><li>Spillere starter jobbet ved start NPC/location.</li><li>Holdet får en mission og eventuelt et køretøj.</li><li>Ghosts spawner på valgte locations.</li><li>Spillere bruger target/interact for at fange ghosts.</li><li>Missionen slutter når timeren udløber eller alle ghosts er fanget.</li><li>Rewards og leaderboard opdateres serverside.</li></ol>
+<h2>Fejlfinding</h2>
+<ul><li>Hvis ghosts ikke spawner, tjek model load og coords.</li><li>Hvis target ikke virker, tjek <code>ox_target</code> og entity registration.</li><li>Hvis vehicle ikke spawner, tjek modelnavn og spawn coords.</li><li>Hvis keys ikke gives, tjek om <code>t1ger_keys</code> eventnavn matcher.</li><li>Hvis leaderboard fejler, tjek SQL og <code>oxmysql</code>.</li></ul>
+
+    </article>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><span><b>SM Development</b> · FiveM scripts documentation</span><span>Red/Black Edition</span></div></footer>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>License System · SM Development Docs</title>
+  <meta name="description" content="SM Development license system guide." />
+  <link rel="icon" href="assets/img/sm-logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="SM Development Docs">
+        <img class="logo" src="assets/img/sm-logo.svg" alt="SM Development logo">
+        <span>SM Development <small>FiveM Script Docs</small></span>
+      </a>
+      <button class="mobile-btn" data-mobile-btn>Menu</button>
+      <nav class="navlinks" data-navlinks><a data-nav href="index.html">Home</a><a data-nav href="installation.html">Installation</a><a data-nav href="license-system.html">License System</a><a data-nav href="troubleshooting.html">Troubleshooting</a><a data-nav href="scripts/admin-panel.html">Admin Panel</a><a data-nav href="scripts/fraud.html">Fraud</a><a data-nav href="scripts/ghost-hunting.html">Ghost Hunting</a></nav>
+    </div>
+  </header>
+  <main class="container layout">
+    <aside class="sidebar">
+      <div class="side-title">Docs</div>
+      <a data-nav href="index.html"><span>Home</span><small>›</small></a><a data-nav href="installation.html"><span>Installation</span><small>›</small></a><a data-nav href="license-system.html"><span>License System</span><small>›</small></a><a data-nav href="troubleshooting.html"><span>Troubleshooting</span><small>›</small></a>
+      <div class="side-title">Scripts</div>
+      <a data-nav href="scripts/admin-panel.html"><span>Admin Panel</span><small>›</small></a><a data-nav href="scripts/fraud.html"><span>Fraud</span><small>›</small></a><a data-nav href="scripts/ghost-hunting.html"><span>Ghost Hunting</span><small>›</small></a>
+    </aside>
+    <article class="main doc">
+      
+<h1>License System</h1>
+<p class="lead">Flere SM Development scripts kan bruge license-system med license key, API check og IP-lock.</p>
+<div class="meta"><span class="tag red">Security</span><span class="tag">License Key</span><span class="tag">IP-lock</span><span class="tag">Discord Bot</span></div>
+<h2>Hvad license systemet tjekker</h2>
+<ul><li>Om license keyen findes.</li><li>Om license keyen er aktiv.</li><li>Om licensen er udløbet.</li><li>Om licensen er disabled eller banned.</li><li>Om serverens IP matcher licensen.</li><li>Om license API’en svarer korrekt.</li></ul>
+<h2>Typisk config</h2>
+<pre><code>Config.License = {
+    Enabled = true,
+    Key = 'DIN_LICENSE_KEY_HER',
+    Debug = false
+}
+
+Config.LicenseAPI = {
+    Url = 'https://your-license-api.example.com',
+    Timeout = 5000
+}</code></pre>
+<h2>Console commands</h2>
+<p>Commands kan variere mellem scripts, men kan fx være:</p>
+<pre><code>smlicensestatus
+smlicensecheck
+nexuslicensestatus
+nexuslicensecheck</code></pre>
+<h2>Discord bot commands</h2>
+<pre><code>/license-create
+/license-check
+/license-disable
+/license-enable
+/license-ban
+/license-delete
+/license-reset-ip
+/license-list</code></pre>
+<div class="callout warning"><strong>Upload aldrig secrets.</strong><p>Bot token, API secret, database password, webhook URL og license keys må ikke ligge offentligt på GitHub.</p></div>
+<h2>Når license fejler</h2>
+<ol><li>Tjek om keyen er skrevet korrekt.</li><li>Tjek om serverens IP matcher licensen.</li><li>Tjek om API’en er online.</li><li>Tjek om serveren har internetadgang.</li><li>Tjek om licensen er expired, disabled eller banned.</li></ol>
+
+    </article>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><span><b>SM Development</b> · FiveM scripts documentation</span><span>Red/Black Edition</span></div></footer>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
